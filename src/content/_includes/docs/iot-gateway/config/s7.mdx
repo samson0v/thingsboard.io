@@ -474,8 +474,15 @@ Configuration example for attribute updates for Siemens Logo! PLCs:
 
 ThingsBoard allows sending [RPC commands](/docs/reference/mqtt-api/rpc/) to the device that is connected
 to ThingsBoard directly or via Gateway.
-Configuration, provided in this section is used for sending RPC requests from ThingsBoard to device. The following
-parameters are used to configure RPC methods:
+Configuration, provided in this section is used for sending RPC requests from ThingsBoard to device. 
+
+<Aside type="note">
+  **Please note:**
+  Also, built-in reserved get/set RPC methods let you read or write any address without configuring `serverSideRpc`
+  manually. See <DocLink product={props.product} path="features/reserved-rpc/">the guide</DocLink>.
+</Aside>
+
+The following parameters are used to configure RPC methods:
 
 <Tabs>
 

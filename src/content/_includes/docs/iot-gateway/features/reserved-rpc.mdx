@@ -425,23 +425,23 @@ The following connectors support built-in GET/SET RPC methods:
         | `bit` | Bit number for S7 PLCs. **Only for boolean values** |
         | `value` | Value that will be written to the device|
 
-        Example — set an integer value to `12`:
+        Example — set a boolean status flag at DB0, byte 0, bit 1 to `false`:
 
         ```bash
-        set type=data;dbNumber=1;start=8;dataType=INT;size=2;bit=0;value=12;
+        set type=data;dbNumber=0;start=0;dataType=bool;size=1;bit=1;value=false; 
         ```
 
         Response:
 
         ```json
-        {"result": {"success": "Successfully wrote value bytearray(b'\\x00\\x0c') to device S7 PLC Working Types for RPC method set"}}
+        {"result":{"success":"Successfully wrote value bytearray(b'\\x00') to device S7 PLC for RPC method set"}}
         ```
 
         <ImageGallery images={[
           {
             src: '/src/assets/images/gateway/get-set-connector-rpc/s7-plc-get-set-rpc-2.png',
-            alt: 'S7 PLC SET RPC writing the new integer value',
-            caption: 'S7 PLC SET — writing the new integer value.',
+            alt: 'S7 PLC SET RPC writing the new boolean value',
+            caption: 'S7 PLC SET — writing the new boolean value.',
           },
         ]} />
 
@@ -458,10 +458,10 @@ The following connectors support built-in GET/SET RPC methods:
         | `tag` | Tag address for S7 PLCs |
         | `value` | Value that will be written to the device|
 
-        Example — set the `t_bool` status flag to `true`:
+        Example:
 
         ```bash
-        set type=tag;tag=DB1.DBX0.0:BOOL;value=true;
+        set type=tag;tag=DB0.DBD104:REAL;value=12345;
         ```
       </TabItem>
 
@@ -511,23 +511,23 @@ The following connectors support built-in GET/SET RPC methods:
         | `vmAddress` | VM address for Siemens Logo! PLCs |
         | `value` | Value that will be written to the device|
 
-        Example — set the humidity at `VW30` to `80`:
+        Example — set the temperature at `VW30` to `35`:
 
         ```bash
-        set type=vm;vmAddress=VW30;value=80;
+        set type=vm;vmAddress=VW30;value=35;
         ```
 
         Response:
 
         ```json
-        {"result": {"success": "Successfully wrote value 80 to device LOGO for RPC method set"}}
+        {"result":{"success":"Successfully wrote value 35 to device LOGO for RPC method set"}}
         ```
 
         <ImageGallery images={[
           {
             src: '/src/assets/images/gateway/get-set-connector-rpc/s7-logo-get-set-rpc-2.png',
-            alt: 'Siemens Logo! SET RPC writing the new light level value',
-            caption: 'Siemens Logo! SET — writing the new light level value.',
+            alt: 'Siemens Logo! SET RPC writing the new temperature value',
+            caption: 'Siemens Logo! SET — writing the new temperature value.',
           },
         ]} />
       </TabItem>

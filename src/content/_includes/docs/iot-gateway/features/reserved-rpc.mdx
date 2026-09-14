@@ -368,10 +368,10 @@ The following connectors support built-in GET/SET RPC methods:
         | `size` | Size of the parameter in bytes for S7 PLCs |
         | `bit` | Bit number for S7 PLCs. **Only for boolean values** |
 
-        Example — read a boolean status flag from DB0, byte 0, bit 1:
+        Example — read a boolean status flag from DB1, byte 0, bit 1:
 
         ```bash
-        get type=data;dbNumber=0;start=0;dataType=bool;size=1;bit=1;
+        get type=data;dbNumber=1;start=0;dataType=bool;size=1;bit=1;
         ```
 
         Response:
@@ -403,7 +403,7 @@ The following connectors support built-in GET/SET RPC methods:
         Example:
 
         ```bash
-        get type=tag;tag=DB0.DBD104:REAL;
+        get type=tag;tag=DB1.DBD104:REAL;
         ```
 
         #### SET
@@ -425,16 +425,16 @@ The following connectors support built-in GET/SET RPC methods:
         | `bit` | Bit number for S7 PLCs. **Only for boolean values** |
         | `value` | Value that will be written to the device|
 
-        Example — set a boolean status flag at DB0, byte 0, bit 1 to `false`:
+        Example — set a boolean status flag at DB1, byte 0, bit 1 to `false`:
 
         ```bash
-        set type=data;dbNumber=0;start=0;dataType=bool;size=1;bit=1;value=false; 
+        set type=data;dbNumber=1;start=0;dataType=bool;size=1;bit=1;value=false; 
         ```
 
         Response:
 
         ```json
-        {"result":{"success":"Successfully wrote value bytearray(b'\\x00') to device S7 PLC for RPC method set"}}
+        {"result":"Successfully wrote value bytearray(b'\\x00') to device S7 PLC for RPC method set"}
         ```
 
         <ImageGallery images={[
@@ -461,7 +461,7 @@ The following connectors support built-in GET/SET RPC methods:
         Example:
 
         ```bash
-        set type=tag;tag=DB0.DBD104:REAL;value=12345;
+        set type=tag;tag=DB1.DBD104:REAL;value=12345;
         ```
       </TabItem>
 
@@ -520,7 +520,7 @@ The following connectors support built-in GET/SET RPC methods:
         Response:
 
         ```json
-        {"result":{"success":"Successfully wrote value 35 to device LOGO for RPC method set"}}
+        {"result":"Successfully wrote value 35 to device S7_LOGO for RPC method set"}
         ```
 
         <ImageGallery images={[

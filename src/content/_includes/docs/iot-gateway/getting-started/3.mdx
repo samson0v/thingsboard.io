@@ -73,12 +73,12 @@ To create a connector with the default configuration, follow these steps:
        alt: 'MQTT connector created with default configuration',
      },
    ]} />
-5. Let's change default `127.0.0.1` host to `host.docker.internal`. Click on "**Connection to broker**" tab and change the host to `host.docker.internal`. Click the "**Save**" button to apply changes.
+5. Let's change default `127.0.0.1` host to `host.docker.internal`. Click on "**Connection to broker**" tab and change the host to `host.docker.internal`, and set the port to **1884**. Click the "**Save**" button to apply changes.
 
    <ImageGallery images={[
      {
        src: '/src/assets/images/gateway/dashboard/gateway-getting-started-mqtt-15-ce.png',
-       alt: 'Change default host to host.docker.internal',
+       alt: 'Change default host to host.docker.internal and port to 1884',
      },
    ]} />
 </Steps>
@@ -86,7 +86,7 @@ To create a connector with the default configuration, follow these steps:
 Also, you can see the connector logs to make sure that the connector works, for this purpose, follow these steps:
 
 <Steps>
-1. In the **General** connector tab enable remove logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Log level** drop-down menu. Click on the **Save** button to apply changes.
+1. In the **General** connector tab enable remote logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Logging level** drop-down menu. Click on the **Save** button to apply changes.
 
    <ImageGallery images={[
      {
@@ -104,7 +104,7 @@ Also, you can see the connector logs to make sure that the connector works, for 
      },
    ]} />
 
-3. You can see the **Logs** table that consists of **Created time**, **Status** and **Message** columns.
+3. You can see the **Logs** table that consists of **Created time**, **Level** and **Message** columns.
 
    <ImageGallery images={[
      {
@@ -180,7 +180,7 @@ To create a connector with the default configuration, follow these steps:
      },
    ]} />
 
-5. Let's change default `127.0.0.1` host to `host.docker.internal`. Click on "**Master Connections**" tab, click on "**pencil**" icon and change the host to `host.docker.internal`. Click the "**Apply**" button and then "**Save**" button to apply changes.
+5. Let's change default `127.0.0.1` host to `host.docker.internal`. Select "Basic" mode, then click on "**Master Connections**" tab, click on "**pencil**" icon and change the host to `host.docker.internal`. Click the "**Apply**" button and then "**Save**" button to apply changes.
 
    <ImageGallery images={[
      {
@@ -197,7 +197,7 @@ To create a connector with the default configuration, follow these steps:
 Also, you can see the connector logs to make sure that the connector works, for this purpose, follow these steps:
 
 <Steps>
-1. In the **General** connector tab enable remove logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Log level** drop-down menu. Click on the **Save** button to apply changes.
+1. In the **General** connector tab enable remote logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Logging level** drop-down menu. Click on the **Save** button to apply changes.
 
    <ImageGallery images={[
      {
@@ -215,7 +215,7 @@ Also, you can see the connector logs to make sure that the connector works, for 
      },
    ]} />
 
-3. You can see the **Logs** table that consists of **Created time**, **Status** and **Message** columns.
+3. You can see the **Logs** table that consists of **Created time**, **Level** and **Message** columns.
 
    <ImageGallery images={[
      {
@@ -290,7 +290,7 @@ To create a connector with the default configuration, follow these steps:
        alt: 'OPC-UA connector created with default configuration',
      },
    ]} />
-5. Let's change default `127.0.0.1` host to `host.docker.internal`. Click on "**Server**" tab and change the host to `opc.tcp://host.docker.internal:4840/freeopcua/server/`. Click the "**Save**" button to apply changes.
+5. Let's change default `127.0.0.1` host to `host.docker.internal`. Select "**Basic**" mode, then click on "**Server**" tab and change the host to `opc.tcp://host.docker.internal:4840/freeopcua/server/`. Click the "**Save**" button to apply changes.
 
    <ImageGallery images={[
      {
@@ -303,7 +303,7 @@ To create a connector with the default configuration, follow these steps:
 Also, you can see the connector logs to make sure that the connector works, for this purpose, follow these steps:
 
 <Steps>
-1. In the **General** connector tab enable remove logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Log level** drop-down menu. Click on the **Save** button to apply changes.
+1. In the **General** connector tab enable remote logging by turning on the **Enable remote logging** toggle. Choose **DEBUG** in the **Logging level** drop-down menu. Click on the **Save** button to apply changes.
 
    <ImageGallery images={[
      {
@@ -321,7 +321,7 @@ Also, you can see the connector logs to make sure that the connector works, for 
      },
    ]} />
 
-3. You can see the **Logs** table that consists of **Created time**, **Status** and **Message** columns.
+3. You can see the **Logs** table that consists of **Created time**, **Level** and **Message** columns.
 
    <ImageGallery images={[
      {

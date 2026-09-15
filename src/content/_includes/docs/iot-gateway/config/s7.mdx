@@ -16,6 +16,8 @@ Also, Siemenst Logo! PLCs are supported. The connector uses the S7 protocol to c
 with the PLCs and retrieve data.
 
 <Aside type="note">
+  _S7 connector supported by the gateway version 3.8.5 and higher._
+  
   Connect the gateway before creating the connector.
 </Aside>
 
@@ -57,58 +59,76 @@ Below is a full example of the configuration file:
       "deviceProfileName": "default",
       "autoReconnect": true,
       "maxRetries": 3,
-      "retryDelay": 1.0,
-      "maxDelay": 30.0,
+      "retryDelay": 1,
+      "maxDelay": 30,
       "heartbeatInterval": 0,
-      "pollPeriod": 30000,
-      "attributes": [],
-      "timeseries": [
+      "pollPeriod": 10000,
+      "attributes": [
         {
-          "type": "data",
-          "key": "light",
-          "dataType": "bool",
-          "dbNumber": 0,
-          "start": 0,
-          "size": 1,
-          "bit": 1
+          "type": "tag",
+          "key": "power",
+          "tag": "DB1.DBD204:REAL"
         },
         {
           "type": "tag",
-          "key": "raw_data",
-          "tag": "DB0.DBB100:STRING[37]"
+          "key": "frequency",
+          "tag": "DB1.DBD200:REAL"
+        }
+      ],
+      "timeseries": [
+        {
+          "type": "data",
+          "key": "temperature",
+          "dataType": "real",
+          "dbNumber": 1,
+          "start": 50,
+          "size": 4
+        },
+        {
+          "type": "data",
+          "key": "humidity",
+          "dataType": "lreal",
+          "dbNumber": 1,
+          "start": 54,
+          "size": 8
+        },
+        {
+          "type": "data",
+          "key": "relay",
+          "dataType": "bool",
+          "dbNumber": 1,
+          "start": 0,
+          "size": 1,
+          "bit": 0
         }
       ],
       "attributeUpdates": [
         {
-          "key": "light",
-          "type": "data",
-          "dataType": "bool",
-          "dbNumber": 0,
-          "start": 0,
-          "size": 1,
-          "bit": 1
+          "type": "tag",
+          "key": "relay",
+          "tag": "DB1.DBX0.0:BOOL"
         }
       ],
       "serverSideRpc": [
         {
-          "method": "set_light",
-          "requestType": "write",
-          "type": "data",
-          "dataType": "bool",
-          "dbNumber": 0,
-          "start": 0,
-          "size": 1,
-          "bit": 1
-        },
-        {
-          "method": "get_light",
+          "method": "getRelay",
           "requestType": "read",
           "type": "data",
           "dataType": "bool",
-          "dbNumber": 0,
+          "dbNumber": 1,
           "start": 0,
           "size": 1,
-          "bit": 1
+          "bit": 0
+        },
+        {
+          "method": "setRelay",
+          "requestType": "write",
+          "type": "data",
+          "dataType": "bool",
+          "dbNumber": 1,
+          "start": 0,
+          "size": 1,
+          "bit": 0
         }
       ]
     },
@@ -120,7 +140,12 @@ Below is a full example of the configuration file:
       "tsapLogo": 30,
       "deviceName": "LOGO",
       "deviceProfileName": "default",
-      "pollPeriod": 1000,
+      "autoReconnect": true,
+      "maxRetries": 3,
+      "retryDelay": 1,
+      "maxDelay": 30,
+      "heartbeatInterval": 0,
+      "pollPeriod": 10000,
       "attributes": [],
       "timeseries": [
         {
@@ -132,6 +157,27 @@ Below is a full example of the configuration file:
           "type": "vm",
           "key": "humidity",
           "vmAddress": "VW0"
+        }
+      ],
+      "attributeUpdates": [
+        {
+          "type": "vm",
+          "key": "lightLevel",
+          "vmAddress": "VW30"
+        }
+      ],
+      "serverSideRpc": [
+        {
+          "method": "setLight",
+          "requestType": "write",
+          "type": "vm",
+          "vmAddress": "VW30"
+        },
+        {
+          "method": "getLight",
+          "requestType": "read",
+          "type": "vm",
+          "vmAddress": "VW30"
         }
       ]
     }
@@ -167,11 +213,11 @@ Configuration parameters for devices:
 | `devices[].port` | | Device port number. |
 | `devices[].rack` | 0 | Rack number for S7 PLCs (only for **PLC** type). |
 | `devices[].slot` | 1 | Slot number for S7 PLCs (only for **PLC** type). |
-| `devices[].autoReconnect` | `true` | Enable automatic reconnection to the device (only for **PLC** type). |
-| `devices[].maxRetries` | 3 | Maximum number of reconnection attempts (only for **PLC** type). |
-| `devices[].retryDelay` | 1.0 | Delay between reconnection attempts in seconds (only for **PLC** type). |
-| `devices[].maxDelay` | 30.0 | Maximum delay between reconnection attempts in seconds (only for **PLC** type). |
-| `devices[].heartbeatInterval` | 0 | Heartbeat interval in seconds (only for **PLC** type). |
+| `devices[].autoReconnect` | `true` | Enable automatic reconnection to the device. |
+| `devices[].maxRetries` | 3 | Maximum number of reconnection attempts. |
+| `devices[].retryDelay` | 1.0 | Delay between reconnection attempts in seconds. |
+| `devices[].maxDelay` | 30.0 | Maximum delay between reconnection attempts in seconds. |
+| `devices[].heartbeatInterval` | 0 | Heartbeat interval in seconds. |
 | `devices[].tsapSnap7` ** | 0 | TSAP for S7 PLCs (only for **LOGO** type). |
 | `devices[].tsapLogo` ** | 0 | TSAP for Siemens Logo! PLCs (only for **LOGO** type). |
 | `devices[].deviceName` | | Device name in ThingsBoard. |
@@ -221,6 +267,11 @@ Example of the **LOGO** configuration:
       "tsapLogo": 30,
       "deviceName": "LOGO",
       "deviceProfileName": "default",
+      "autoReconnect": true,
+      "maxRetries": 3,
+      "retryDelay": 1,
+      "maxDelay": 30,
+      "heartbeatInterval": 0,
       "pollPeriod": 1000,
       ...
     }
@@ -371,9 +422,7 @@ commands to the devices.
 
 S7 connector supports the following requests mapping:
 - **Attribute updates** - allows update device nodes values from ThingsBoard platform instance.
-- **RPC methods** - allows sending RPC commands to devices. Using RPC methods, you can get or set values of the PLC. S7 connector supports different types of RPC methods, such as:
-  - **Reserved GET/SET methods** - these methods are automatically created for each attribute and time series parameter. You can use them to get or set values of the PLC device.
-  - **Configurable RPC methods to device** - these methods allow you to configure custom RPC commands in connector configuration that can be sent to the devices.
+- **RPC methods** - allows sending RPC commands to devices. Using RPC methods, you can get or set values of the PLC. S7 connector supports different types of RPC methods. See the [RPC methods](#rpc-methods) section for more details.
 
 ### Attribute updates
 
@@ -436,7 +485,7 @@ Configuration example for attribute updates for S7 PLCs by `tag` type request:
     {
       "type": "tag",
       "key": "isOpen",
-      "tag": "DB1.DBX2.0"
+      "tag": "DB1.DBX2.0:BOOL"
     }
   ]
 }
@@ -473,15 +522,16 @@ Configuration example for attribute updates for Siemens Logo! PLCs:
 ### RPC methods
 
 ThingsBoard allows sending [RPC commands](/docs/reference/mqtt-api/rpc/) to the device that is connected
-to ThingsBoard directly or via Gateway.
-Configuration, provided in this section is used for sending RPC requests from ThingsBoard to device. 
+to ThingsBoard directly or via Gateway. The S7 connector supports three main RPC approaches:
 
-<Aside type="note">
-  Also, built-in reserved get/set RPC methods let you read or write any address without configuring `serverSideRpc`
-  manually. See <DocLink product={props.product} path="features/reserved-rpc/">the guide</DocLink>.
-</Aside>
+S7 connector supports the following requests mapping:
 
-The following parameters are used to configure RPC methods:
+- **Configurable RPC to device** - these methods allow you to configure custom RPC commands in connector configuration that can be sent to the devices.
+- <DocLink product={props.product} path="features/reserved-rpc/">Reserved GET/SET RPCs</DocLink> - reserved methods that allow reading or writing any address without manually configuring serverSideRpc. See the RPC guide.
+- **Connector RPC** - ad-hoc requests sent directly to the S7 connector for instant debugging and testing parameters from the ThingsBoard UI.
+
+
+The parameters listed below are used specifically to configure RPCs to devices in the serverSideRpc section:
 
 <Tabs>
 
@@ -511,7 +561,7 @@ Configuration example for RPC methods for S7 PLCs by `data` type request:
       "requestType": "write",
       "type": "data",
       "dataType": "bool",
-      "dbNumber": 0,
+      "dbNumber": 1,
       "start": 0,
       "size": 1,
       "bit": 1
@@ -521,7 +571,7 @@ Configuration example for RPC methods for S7 PLCs by `data` type request:
       "requestType": "read",
       "type": "data",
       "dataType": "bool",
-      "dbNumber": 0,
+      "dbNumber": 1,
       "start": 0,
       "size": 1,
       "bit": 1
@@ -548,13 +598,13 @@ Configuration example for RPC methods for S7 PLCs by `tag` type request:
       "method": "set_light",
       "requestType": "write",
       "type": "tag",
-      "tag": "DB0.DBX0.0"
+      "tag": "DB1.DBX0.0"
     },
     {
       "method": "get_light",
       "requestType": "read",
       "type": "tag",
-      "tag": "DB0.DBX0.0"
+      "tag": "DB1.DBX0.0"
     }
   ]
 }
@@ -619,8 +669,9 @@ S7 connector supports PLC4X / Siemens STEP7 dialect tag syntax. The following ta
 
 S7 connector supports the following data types for both uplink and downlink:
 
-`boolean/bool`, `string/str/s7string`, `raw/bytes`, `bit`, `byte`, `usint`, 
-`uint8`, `sint`, `int8`, `int`, `int16`, `short`, `uint`, `uint16`, `word`, 
-`dint`, `int32`, `udint`, `uint32`, `dword`, `real`, `float`, `float32`, 
-`lreal`, `double`, `float64`, `char`, `wchar`, `lint`, `ulint`, `time`, 
-`ltime`, `tod`, `ltod`, `date`, `dt`, `ldt`, `dtl`.
+- **Boolean & Bits**: `boolean/bool`, `bit`.
+- **Integers & Words**: `byte`, `usint`, `uint8`, `sint`, `int8`, `int`, `int16`, `short`, `uint`, `uint16`, `word`, `dint`, `int32`, `udint`, `uint32`, `dword`, `lint`, `ulint`, `lword`.
+- **Floating Point**: `real`, `float`, `float32`, `lreal`, `double`, `float64`.
+- **Characters & Strings**: `char`, `wchar`, `string/str/s7string`, `wstring`, `fstring`.
+- **Date & Time**: `time`, `ltime`, `tod`, `ltod`, `date`, `dt`, `ldt`, `dtl`.
+- **Raw Bytes**: `raw`, `bytes`.

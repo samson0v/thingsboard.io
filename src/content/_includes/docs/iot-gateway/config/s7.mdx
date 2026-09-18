@@ -1,6 +1,5 @@
 import DocLink from '@components/DocLink.astro';
 import { Aside } from '@astrojs/starlight/components';
-import ImageGallery from '@components/ImageGallery.astro';
 import Tabs from '@components/Tabs.astro';
 import TabItem from '@components/TabItem.astro';
 
@@ -16,7 +15,7 @@ Also, Siemens Logo! PLCs are supported. The connector uses the S7 protocol to co
 with the PLCs and retrieve data.
 
 <Aside type="note">
-  _S7 connector supported by the gateway version 3.8.5 and higher._
+  _The S7 connector supported by the gateway version 3.8.5 and higher._
   
   Connect the gateway before creating the connector.
 </Aside>
@@ -218,7 +217,7 @@ Configuration parameters for devices:
 | `devices[].retryDelay` | 1.0 | Delay between reconnection attempts in seconds. |
 | `devices[].maxDelay` | 30.0 | Maximum delay between reconnection attempts in seconds. |
 | `devices[].heartbeatInterval` | 0 | Heartbeat interval in seconds. |
-| `devices[].tsapSnap7` ** | 0 | TSAP for S7 PLCs (only for **LOGO** type). |
+| `devices[].tsapSnap7` ** | 0 | TSAP for Siemens Logo! PLCs (only for **LOGO** type). |
 | `devices[].tsapLogo` ** | 0 | TSAP for Siemens Logo! PLCs (only for **LOGO** type). |
 | `devices[].deviceName` | | Device name in ThingsBoard. |
 | `devices[].deviceProfileName` | | Device profile name in ThingsBoard. |
@@ -421,7 +420,7 @@ from the devices, how it will update device attributes, and how it will send RPC
 commands to the devices.
 
 S7 connector supports the following requests mapping:
-- **Attribute updates** - allows update device nodes values from ThingsBoard platform instance.
+- **Attribute updates** - allows update device values from ThingsBoard platform instance.
 - **RPC methods** - allows sending RPC commands to devices. Using RPC methods, you can get or set values of the PLC. S7 connector supports different types of RPC methods. See the [RPC methods](#rpc-methods) section for more details.
 
 ### Attribute updates
@@ -523,8 +522,6 @@ Configuration example for attribute updates for Siemens Logo! PLCs:
 
 ThingsBoard allows sending [RPC commands](/docs/reference/mqtt-api/rpc/) to the device that is connected
 to ThingsBoard directly or via Gateway. The S7 connector supports three main RPC approaches:
-
-S7 connector supports the following requests mapping:
 
 - **Configurable RPC to device** - these methods allow you to configure custom RPC commands in connector configuration that can be sent to the devices.
 - <DocLink product={props.product} path="features/reserved-rpc/">Reserved GET/SET RPCs</DocLink> - reserved methods that allow reading or writing any address without manually configuring serverSideRpc. See the RPC guide.
